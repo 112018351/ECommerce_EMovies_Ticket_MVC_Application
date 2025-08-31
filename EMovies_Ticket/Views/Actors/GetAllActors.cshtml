@@ -1,0 +1,59 @@
+﻿@model IEnumerable<EMovies_Ticket.Models.Actor>
+
+@{
+    ViewData["Actors"] = "Welcome in Actors Page";
+}
+
+<div class="d-flex justify-content-center align-items-center">
+    <h1>@ViewData["Actors"]</h1>
+</div>
+<div class="row mt-4">
+    <div class="col-md-10 offset-md-1">
+        <table class="table align-middle">
+            <thead>
+                <tr class="text-center">
+                    <th>@Html.DisplayNameFor(model => model.ProfilePictureURL)</th>
+                    <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Bio)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr style="height:120px;">
+                        @* <-- Adjust height here *@
+                        <td class="align-middle">
+                            <img class="rounded-circle"
+                                 src="@item.ProfilePictureURL"
+                                 alt="@item.FullName"
+                                 style="width:100px; height:100px; object-fit:cover;" />
+                        </td>
+                        <td class="align-middle">
+                            <div class="fw-bold fs-5">@Html.DisplayFor(m => item.FullName)</div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="text-muted">@Html.DisplayFor(m => item.Bio)</div>
+                        </td>
+                        <td class="align-middle">
+                            <div class="d-flex gap-2">
+                                <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </a>|
+                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
+                                    <i class="bi bi-eye"></i> Details
+                                </a>|
+                                <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div>
+            <a asp-controller="Producer" asp-action="GetAllProducers">Go To Producer</a>
+        </div>
+    </div>
+</div>

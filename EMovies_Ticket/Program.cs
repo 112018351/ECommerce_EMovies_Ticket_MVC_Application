@@ -1,3 +1,6 @@
+using EMovies_Ticket.Data;
+using Microsoft.EntityFrameworkCore;
+
 namespace EMovies_Ticket
 {
     public class Program
@@ -8,7 +11,8 @@ namespace EMovies_Ticket
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-
+            builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -27,9 +31,9 @@ namespace EMovies_Ticket
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}")
+                pattern: "{controller=Actors}/{action=GetAllActors}/{id?}")
                 .WithStaticAssets();
-
+            AppDbInitializer.Seed(app);
             app.Run();
         }
     }

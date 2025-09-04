@@ -12,10 +12,10 @@ namespace EMovies_Ticket.Controllers
         {
             this._context = context;
         }
-        public async Task<IActionResult> GetAllCinemas()
+        public async Task<IActionResult> GetAllMovies()
         {
-            var data = await _context.Movies.ToListAsync();
-            return View();
+            var data = await _context.Movies.Include(a => a.Cinema).OrderBy(o => o.Name).ToListAsync();
+            return View(data);
         }
     }
 }

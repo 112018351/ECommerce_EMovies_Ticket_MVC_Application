@@ -1,0 +1,71 @@
+﻿@model IEnumerable<EMovies_Ticket.Models.Movie>
+
+@{
+    ViewData["Movies"] = "Welcome in Movies Page";
+}
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4 col-sm-6 mb-3">
+            <div class="card h-100 shadow-sm">
+
+                <!-- Header -->
+                <div class="card-header bg-info text-white d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">@item.Name</h5>
+                    <a class="text-white"><i class="bi bi-pencil-square"></i></a>
+                </div>
+
+                <!-- Poster & Details -->
+                <div class="row g-0">
+                    <div class="col-6 d-flex justify-content-center align-items-center" style="height: 250px;">
+                        <img src="@item.ImageUrl"
+                             alt="@item.Name"
+                             class="img-fluid"
+                             style="max-height: 100%; object-fit: contain;">
+                    </div>
+                    <div class="col-6">
+                        <div class="card-body p-2">
+                            <p class="card-text mb-1">@item.Description</p>
+                            <p class="card-text mb-1"><b>Cinema:</b> @item.Cinema.Name</p>
+                            <p class="card-text mb-1"><b>Category:</b> @item.MovieCategory</p>
+                            <p class="card-text mb-1"><b>Start:</b> @item.StartDate:dd MMM yyyy</p>
+                            <p class="card-text mb-1"><b>End:</b> @item.EndDate:dd MMM yyyy</p>
+                            <p class="card-text mb-1">
+                                <b>Status:</b>
+                                @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
+                                {
+                                    <span class="badge bg-success">AVAILABLE</span>
+                                }
+                                else if (DateTime.Now > item.EndDate)
+                                {
+                                    <span class="badge bg-danger">EXPIRED</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-primary">UPCOMING</span>
+                                }
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Footer (Buttons) -->
+                <div class="card-footer d-flex justify-content-between">
+                    <a class="btn btn-outline-primary"
+                       asp-action="Details"
+                       asp-route-id="@item.Id">
+                        <i class="bi bi-eye-fill"></i> Show Details
+                    </a>
+                    <a class="btn btn-success text-white @((DateTime.Now > item.EndDate) ? "disabled" : "")"
+                       asp-controller="Orders"
+                       asp-action="AddItemToShoppingCart"
+                       asp-route-id="@item.Id">
+                        <i class="bi bi-cart-plus"></i> Add to Cart (@item.Price.ToString("c"))
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    }
+</div>

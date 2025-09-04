@@ -1,4 +1,5 @@
 ﻿using EMovies_Ticket.Data;
+using EMovies_Ticket.Data.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -6,16 +7,16 @@ namespace EMovies_Ticket.Controllers
 {
     public class ProducerController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly IProducerService _producerService;
 
-        public ProducerController(AppDbContext context)
+        public ProducerController(IProducerService producer)
         {
-            this._context = context;
+           _producerService = producer;
         }
         public async Task<IActionResult> GetAllProducers()
         {
-            var data = await _context.Producers.ToListAsync();
-            return View(data);
+            //await _producerService.GetAllAsync();
+            return View();
         }
     }
 }

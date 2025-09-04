@@ -40,7 +40,7 @@
                                 <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary btn-sm">
                                     <i class="bi bi-pencil-square"></i> Edit
                                 </a>|
-                                <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
+                                <a asp-action="ActorDetails" asp-route-id="@item.Id" class="btn btn-outline-info btn-sm">
                                     <i class="bi bi-eye"></i> Details
                                 </a>|
                                 <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">
@@ -52,8 +52,8 @@
                 }
             </tbody>
         </table>
-        <div>
-            <a asp-controller="Producer" asp-action="GetAllProducers">Go To Producer</a>
-        </div>
     </div>
+</div>
+<div style="position: fixed; right: 25px; bottom: 25px; z-index: 1050;" class="text-white">
+    <a asp-controller="Actors" asp-action="CreateActor" class="btn btn-success"><i class="bi bi-plus-circle"></i>Add New</a>
 </div>

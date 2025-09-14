@@ -1,10 +1,11 @@
-﻿using EMovies_Ticket.Enum;
+﻿using EMovies_Ticket.Data.Base;
+using EMovies_Ticket.Enum;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace EMovies_Ticket.Models
 {
-    public class Movie
+    public class Movie : IEntityBase
     {
         [Key]
         public int Id { get; set; }
@@ -18,6 +19,7 @@ namespace EMovies_Ticket.Models
         public MovieCategory MovieCategory { get; set; }
         // Relationships
         public List<Actor_Movie> Actor_Movies { get; set; }
+
         //Cinema
         public int CinemaId { get; set; }
         [ForeignKey("CinemaId")]

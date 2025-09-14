@@ -13,13 +13,13 @@ namespace EMovies_Ticket.Data.Base
                 this._context = context;
         }
 
-        public async Task AddActorAsync(T entity)
+        public async Task AddAsync(T entity)
         {
             await _context.Set<T>().AddAsync(entity);
            await  _context.SaveChangesAsync();
 
         }
-        public async Task DeleteActorAsync(int id)
+        public async Task DeleteAsync(int id)
         {
             var entity = await _context.Set<T>().FirstOrDefaultAsync(x => x.Id == id);
             EntityEntry entityEntry = _context.Entry<T>(entity);
@@ -27,11 +27,11 @@ namespace EMovies_Ticket.Data.Base
            await  _context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<T>> GetAllActorsAsync() => await _context.Set<T>().ToListAsync();
+        public async Task<IEnumerable<T>> GetAllAsync() => await _context.Set<T>().ToListAsync();
 
 
         public async Task<T> GetByIdAsync(int id) => await _context.Set<T>().FirstOrDefaultAsync(m => m.Id == id);
-        public async Task UpdateActorAsync(int id, T entity)
+        public async Task UpdateAsync(int id, T entity)
         {
           EntityEntry entityEntry = _context.Entry(entity);
             entityEntry.State = EntityState.Modified;

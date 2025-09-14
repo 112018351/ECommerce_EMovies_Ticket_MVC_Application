@@ -17,6 +17,8 @@ namespace EMovies_Ticket
                 options.UseSqlServer(builder.Configuration.GetConnectionString("dbcs")));
             builder.Services.AddScoped<IActorService, ActorService>();
             builder.Services.AddScoped<IProducerService, ProducerService>();
+            builder.Services.AddScoped<ICinemasService, CinemasService>();
+   
             var app = builder.Build();
             
             // Configure the HTTP request pipeline.
@@ -35,7 +37,7 @@ namespace EMovies_Ticket
             app.MapStaticAssets();
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Movies}/{action=GetAllMovies}/{id?}")
+                pattern: "{controller=Cinemas}/{action=GetAllCinemas}/{id?}")
                 .WithStaticAssets();
             AppDbInitializer.Seed(app);
             app.Run();

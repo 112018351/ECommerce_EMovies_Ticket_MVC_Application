@@ -17,7 +17,7 @@ namespace EMovies_Ticket.Controllers
         }
         public async Task<IActionResult> GetAllActors()
         {
-            var data = await _actorService.GetAllActorsAsync();
+            var data = await _actorService.GetAllAsync();
             return View(data);
         }
 
@@ -35,7 +35,7 @@ namespace EMovies_Ticket.Controllers
               
                 return View(actor);
             }
-           await _actorService.AddActorAsync(actor);
+           await _actorService.AddAsync(actor);
 
             return RedirectToAction("GetAllActors");
         }
@@ -67,7 +67,7 @@ namespace EMovies_Ticket.Controllers
             {
                 return View(actor);
             }
-            await _actorService.UpdateActorAsync(id,actor);
+            await _actorService.UpdateAsync(id,actor);
             return RedirectToAction("GetAllActors");
         }
         // Get: Delete/Actor/1
@@ -91,7 +91,7 @@ namespace EMovies_Ticket.Controllers
             {
                 return View("NotFound");
             }
-            await _actorService.DeleteActorAsync(id);
+            await _actorService.DeleteAsync(id);
 
             return RedirectToAction("GetAllActors");
         }

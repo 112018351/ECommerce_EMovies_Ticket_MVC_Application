@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using EMovies_Ticket.Data.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace EMovies_Ticket.Models
 {
-    public class Cinema
+    public class Cinema : IEntityBase
     {
         [Key]
         public int Id { get; set; }
